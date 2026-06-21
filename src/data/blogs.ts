@@ -1,6 +1,6 @@
-import aetherisBlogImg from '../assets/aetheris-blog.png'
-import privacyBlogImg from '../assets/privacy-blog.png'
-import intelligenceBlogImg from '../assets/amanintelligence-blog.png'
+import aetherisBlogImg from '../assets/aetheris-blog.webp'
+import privacyBlogImg from '../assets/privacy-blog.webp'
+import intelligenceBlogImg from '../assets/amanintelligence-blog.webp'
 
 export interface BlogPost {
   slug: string

@@ -20,10 +20,10 @@ export function Thoughts() {
             <motion.a
               key={post.slug}
               href={`#/blog/${post.slug}`}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 12, scale: 0.985 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.75, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="relative h-[240px] min-[375px]:h-[280px] sm:h-[360px] md:h-[420px] w-full rounded-[12px] md:rounded-[24px] overflow-hidden border border-zinc-200/40 dark:border-zinc-800/40 shadow-md group cursor-pointer block hover:opacity-95 transition-opacity"
             >
               {/* Background Image */}
@@ -52,10 +52,10 @@ export function Thoughts() {
           {/* Card 3: Solid Dark Banner CTA Card */}
           <motion.a
             href="#/blog"
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 12, scale: 0.985 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="bg-[#0c0c0e] text-zinc-100 p-3 md:p-6 rounded-[12px] md:rounded-[24px] border border-zinc-800/60 shadow-md flex flex-col justify-between h-[240px] min-[375px]:h-[280px] sm:h-[360px] md:h-[420px] w-full group cursor-pointer hover:opacity-95 transition-opacity"
           >
             {/* Header Text */}

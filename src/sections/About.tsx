@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'motion/react'
 import { ArrowUpRight } from '@phosphor-icons/react'
-import avatarImg from '../assets/avatar.png'
+import avatarImg from '../assets/avatar.webp'
 
 const LINES = [
   ['From', 'idea', 'to', 'launch.', 'Clean,', 'scalable', 'digital', 'products'],

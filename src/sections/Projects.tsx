@@ -35,10 +35,10 @@ export function Projects() {
               <motion.a
                 key={project.id}
                 href={`#/project/${project.id}`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 12, scale: 0.985 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.75, delay, ease: [0.16, 1, 0.3, 1] }}
                 className="flex flex-col items-start text-left group cursor-pointer hover:opacity-95 transition-opacity"
               >
                 {/* Mockup Card Container */}

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import starImg from '../assets/Star.png'
-import boltImg from '../assets/Bolt.png'
+import starImg from '../assets/Star.webp'
+import boltImg from '../assets/Bolt.webp'
 
 const ROLES = [
   ['Website', 'Developer'],

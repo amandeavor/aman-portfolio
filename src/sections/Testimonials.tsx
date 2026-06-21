@@ -67,14 +67,14 @@ export function Testimonials() {
                 style={{ perspective: '1200px' }}
               >
                 <motion.div
-                  initial={{ rotateY: 180 }}
-                  whileInView={{ rotateY: 0 }}
+                  initial={{ rotateY: 180, opacity: 0, y: 15 }}
+                  whileInView={{ rotateY: 0, opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.05 }}
                   transition={{
                     type: 'spring',
-                    stiffness: 45,
-                    damping: 16,
-                    mass: 1.1,
+                    stiffness: 55,
+                    damping: 18,
+                    mass: 0.95,
                     delay: idx * 0.08,
                   }}
                   style={{ transformStyle: 'preserve-3d' }}
