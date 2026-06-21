@@ -105,7 +105,7 @@ export function Hero() {
           </div>
 
           {/* Line 1 */}
-          <span className="text-[6.5vw] min-[375px]:text-[7vw] sm:text-[8vw] font-extrabold tracking-[-0.03em] text-offblack dark:text-zinc-100 uppercase whitespace-nowrap block min-h-[1.1em]">
+          <span className="text-[8vw] min-[375px]:text-[8.5vw] sm:text-[8vw] font-extrabold tracking-[-0.03em] text-offblack dark:text-zinc-100 uppercase whitespace-nowrap block min-h-[1.1em]">
             {display.line1 || '​'}
             {display.cursorOnLine1 && (
               <span className="typewriter-cursor bg-offblack dark:bg-zinc-100" style={{ height: '0.75em', width: '2px' }} />
@@ -113,7 +113,7 @@ export function Hero() {
           </span>
 
           {/* Line 2 */}
-          <span className="text-[4.5vw] min-[375px]:text-[5vw] sm:text-[5.5vw] font-extrabold tracking-[-0.03em] text-offblack dark:text-zinc-100 uppercase whitespace-nowrap block mt-2 min-h-[1.1em]">
+          <span className="text-[5.5vw] min-[375px]:text-[6vw] sm:text-[5.5vw] font-extrabold tracking-[-0.03em] text-offblack dark:text-zinc-100 uppercase whitespace-nowrap block mt-2 min-h-[1.1em]">
             {display.line2 || '​'}
             {!display.cursorOnLine1 && (
               <span className="typewriter-cursor bg-offblack dark:bg-zinc-100" style={{ height: '0.75em', width: '2px' }} />

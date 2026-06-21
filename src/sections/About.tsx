@@ -112,7 +112,7 @@ export function About() {
             <div className="md:col-span-4 flex justify-center py-2 md:py-4 overflow-visible" style={{ perspective: '1200px' }}>
               <motion.div
                 style={{ y, scale, rotateY, filter }}
-                className="w-[160px] h-[200px] min-[375px]:w-[185px] min-[375px]:h-[235px] sm:w-[220px] sm:h-[280px] md:w-[320px] md:h-[380px] rounded-[20px] md:rounded-[24px] shadow-xl relative shrink-0 z-30 [transform-style:preserve-3d]"
+                className="w-[180px] h-[225px] min-[375px]:w-[210px] min-[375px]:h-[265px] sm:w-[240px] sm:h-[300px] md:w-[320px] md:h-[380px] rounded-[20px] md:rounded-[24px] shadow-xl relative shrink-0 z-30 [transform-style:preserve-3d]"
               >
                 <motion.div
                   style={{ backgroundColor: bgColor, scaleX }}
