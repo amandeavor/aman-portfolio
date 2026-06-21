@@ -1,20 +1,51 @@
+import { motion } from 'motion/react'
+
+const QUICK_LINKS = [
+  { label: 'Home', sectionId: null, href: '#/' },
+  { label: 'About Me', sectionId: 'about' },
+  { label: 'Projects', sectionId: 'projects' },
+  { label: 'Thoughts', sectionId: 'thoughts' },
+  { label: 'Contact', sectionId: 'contact' },
+]
+
 export function Footer() {
-  const row1 = [
-    { label: 'Home', href: '#' },
-    { label: 'About Me', href: '#about' },
-    { label: 'Services', href: '#services' },
-  ]
-  const row2 = [
-    { label: 'Works', href: '#projects' },
-    { label: 'Contact', href: '#contact' },
-  ]
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string | null) => {
+    if (!sectionId) return // let Home (#/) navigate normally
+    e.preventDefault()
+
+    const currentHash = window.location.hash
+    const isDetail =
+      currentHash.startsWith('#/project/') ||
+      currentHash.startsWith('#/blog/') ||
+      currentHash === '#/projects' ||
+      currentHash === '#/blog'
+
+    const scrollTo = () => {
+      const el = document.getElementById(sectionId)
+      if (!el) return
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const lenis = (window as any).lenis
+      if (lenis) {
+        lenis.scrollTo(el, { offset: -80, duration: 1.2 })
+      } else {
+        el.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+
+    if (isDetail) {
+      window.location.hash = '#/'
+      setTimeout(scrollTo, 400)
+    } else {
+      scrollTo()
+    }
+  }
 
   return (
-    <footer className="bg-[#0c0c0e] dark:bg-[#FAF7F3] text-zinc-100 dark:text-zinc-900 pt-28 pb-12 select-none relative overflow-hidden">
+    <footer className="bg-[#0c0c0e] dark:bg-[#FAF7F3] text-zinc-100 dark:text-zinc-900 pt-12 md:pt-28 pb-8 md:pb-12 select-none relative overflow-hidden">
 
-      {/* Massive Watermark - absolutely positioned behind content */}
-      <div className="absolute inset-x-0 bottom-[-2vw] flex justify-center pointer-events-none z-0 overflow-hidden select-none">
-        <span className="text-[24vw] font-bold text-white/[0.02] dark:text-black/[0.04] leading-none font-display uppercase whitespace-nowrap tracking-tighter">
+      {/* Massive Watermark */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden select-none">
+        <span className="text-[46vw] md:text-[22vw] font-bold text-white/[0.04] dark:text-black/[0.04] leading-none font-display uppercase whitespace-nowrap tracking-tighter">
           AMAN
         </span>
       </div>
@@ -36,31 +67,20 @@ export function Footer() {
             <span className="text-[15px] font-bold text-zinc-400 dark:text-zinc-500 font-sans tracking-tight mb-1">
               /Quick links
             </span>
-            <div className="flex flex-col gap-2">
-              {/* Row 1 */}
-              <div className="flex flex-row gap-2">
-                {row1.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="px-5 py-2.5 bg-[#eae9e4] dark:bg-[#1f1f1f] hover:bg-zinc-300 dark:hover:bg-zinc-800 text-[13px] font-bold text-[#121212] dark:text-zinc-100 rounded-xl transition-all shadow-sm whitespace-nowrap"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-              {/* Row 2 */}
-              <div className="flex flex-row gap-2">
-                {row2.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="px-5 py-2.5 bg-[#eae9e4] dark:bg-[#1f1f1f] hover:bg-zinc-300 dark:hover:bg-zinc-800 text-[13px] font-bold text-[#121212] dark:text-zinc-100 rounded-xl transition-all shadow-sm whitespace-nowrap"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
+            <div className="flex flex-wrap gap-2 justify-start">
+              {QUICK_LINKS.map((link) => (
+                <motion.a
+                  key={link.label}
+                  href={link.sectionId ? `#${link.sectionId}` : link.href}
+                  onClick={(e) => handleLinkClick(e, link.sectionId ?? null)}
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                  className="px-5 py-2.5 bg-[#eae9e4] dark:bg-[#1f1f1f] hover:bg-zinc-300 dark:hover:bg-zinc-800 text-[13px] font-bold text-[#121212] dark:text-zinc-100 rounded-xl transition-all shadow-sm whitespace-nowrap block"
+                >
+                  {link.label}
+                </motion.a>
+              ))}
             </div>
           </div>
 
@@ -78,6 +98,14 @@ export function Footer() {
           </div>
         </div>
 
+      </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-zinc-800/40 dark:border-zinc-300/10 relative z-10">
+        <div className="mx-auto max-w-4xl px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-[11px] font-semibold text-zinc-600 dark:text-zinc-400 font-sans">
+          <span>© {new Date().getFullYear()} Aman. All rights reserved.</span>
+          <span className="tracking-wide">Designed & built by Aman</span>
+        </div>
       </div>
 
     </footer>

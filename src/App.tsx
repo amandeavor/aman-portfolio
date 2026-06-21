@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import { Navbar } from './sections/Navbar'
 import { Hero } from './sections/Hero'
 import { About, AboutTagline } from './sections/About'
@@ -11,6 +12,8 @@ import { ProjectDetail } from './sections/ProjectDetail'
 import { BlogDetail } from './sections/BlogDetail'
 import { AllProjects } from './sections/AllProjects'
 import { AllBlogs } from './sections/AllBlogs'
+import { PROJECTS_DATA } from './data/projects'
+import { BLOG_POSTS } from './data/blogs'
 
 function App() {
   const [route, setRoute] = useState(window.location.hash)
@@ -31,9 +34,70 @@ function App() {
   }, [dark])
 
   useEffect(() => {
-    const handleHashChange = () => setRoute(window.location.hash)
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual'
+    }
+    const handleHashChange = () => {
+      const newHash = window.location.hash
+      const isGoingToDetail =
+        newHash.startsWith('#/project/') ||
+        newHash.startsWith('#/blog/') ||
+        newHash === '#/projects' ||
+        newHash === '#/blog'
+
+      if (isGoingToDetail) {
+        // Bypass Lenis completely — set the raw DOM scroll directly.
+        // Lenis reads from the real scroll position on its next RAF tick,
+        // so zeroing this out before React re-renders prevents any flash.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const lenis = (window as any).lenis
+        if (lenis) lenis.stop()
+        document.documentElement.scrollTop = 0
+        document.body.scrollTop = 0
+        if (lenis) setTimeout(() => lenis.start(), 350)
+      }
+      setRoute(newHash)
+    }
     window.addEventListener('hashchange', handleHashChange)
     return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
+  useEffect(() => {
+    let touchStartX = 0
+    let touchStartY = 0
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX
+      touchStartY = e.touches[0].clientY
+    }
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      const currentHash = window.location.hash
+      const isHome = currentHash === '' || currentHash === '#/' || currentHash === '#'
+      if (isHome) return
+
+      const touchEndX = e.changedTouches[0].clientX
+      const touchEndY = e.changedTouches[0].clientY
+
+      const diffX = touchEndX - touchStartX
+      const diffY = touchEndY - touchStartY
+
+      // Swipe Back Gesture requirements:
+      // 1. Starts from the left edge of the screen (first 50px)
+      // 2. Dragged at least 80px horizontally to the right
+      // 3. Vertical movement is small (less than 50px) to distinguish from vertical scrolling
+      if (touchStartX < 50 && diffX > 80 && Math.abs(diffY) < 50) {
+        window.history.back()
+      }
+    }
+
+    window.addEventListener('touchstart', handleTouchStart, { passive: true })
+    window.addEventListener('touchend', handleTouchEnd)
+
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart)
+      window.removeEventListener('touchend', handleTouchEnd)
+    }
   }, [])
 
   useEffect(() => {
@@ -46,13 +110,17 @@ function App() {
     import(/* @vite-ignore */ moduleName).then(({ default: Lenis }) => {
       if (!active) return
       lenisInstance = new Lenis({
-        lerp: 0.045,
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: 'vertical',
         gestureOrientation: 'vertical',
         smoothWheel: true,
+        wheelMultiplier: 1.0,
       })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(window as any).lenis = lenisInstance
       const raf = (time: number) => {
-        if (lenisInstance) {
+        if (active && lenisInstance) {
           lenisInstance.raf(time)
           rafId = requestAnimationFrame(raf)
         }
@@ -62,6 +130,8 @@ function App() {
 
     return () => {
       active = false
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      delete (window as any).lenis
       if (rafId !== null) {
         cancelAnimationFrame(rafId)
       }
@@ -117,12 +187,64 @@ function App() {
     }
   }
 
+  const homeScrollRef = useRef(0)
+  const prevRouteRef = useRef(route)
+
+  useEffect(() => {
+    const wasHome = prevRouteRef.current === '' || prevRouteRef.current === '#/' || prevRouteRef.current === '#'
+    const isHome = route === '' || route === '#/' || route === '#'
+
+    if (wasHome && !isHome) {
+      homeScrollRef.current = window.scrollY
+    }
+    prevRouteRef.current = route
+  }, [route])
+
+  const handleExitComplete = () => {
+    const isHome = route === '' || route === '#/' || route === '#'
+    const targetScroll = isHome ? homeScrollRef.current : 0
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const lenis = (window as any).lenis
+    if (lenis) lenis.stop()
+    document.documentElement.scrollTop = targetScroll
+    document.body.scrollTop = targetScroll
+    if (lenis) setTimeout(() => lenis.start(), 50)
+  }
+
   const isProjectRoute = route.startsWith('#/project/')
   const projectId = isProjectRoute ? route.replace('#/project/', '') : null
   const isBlogRoute = route.startsWith('#/blog/')
   const blogId = isBlogRoute ? route.replace('#/blog/', '') : null
   const isAllProjects = route === '#/projects'
   const isAllBlogs    = route === '#/blog'
+
+  const isDetailPage = isProjectRoute || isBlogRoute || isAllProjects || isAllBlogs
+  const pageKey = isDetailPage ? route : 'home'
+
+  // Known routes — anything else is 404
+  const isKnownRoute =
+    route === '' || route === '#' || route === '#/' ||
+    route.startsWith('#about') || route.startsWith('#projects') ||
+    route.startsWith('#thoughts') || route.startsWith('#contact') ||
+    route.startsWith('#testimonials') || route.startsWith('#services') ||
+    isAllProjects || isAllBlogs ||
+    (isProjectRoute && projectId && !!PROJECTS_DATA[projectId]) ||
+    (isBlogRoute && blogId && !!BLOG_POSTS[blogId])
+
+  // Dynamic document title
+  useEffect(() => {
+    let title = 'Aman | Software Engineer & Creator'
+    if (isProjectRoute && projectId && PROJECTS_DATA[projectId]) {
+      title = `${PROJECTS_DATA[projectId].title} — Aman`
+    } else if (isBlogRoute && blogId && BLOG_POSTS[blogId]) {
+      title = `${BLOG_POSTS[blogId].title} — Aman`
+    } else if (isAllProjects) {
+      title = 'All Projects — Aman'
+    } else if (isAllBlogs) {
+      title = 'All Thoughts — Aman'
+    }
+    document.title = title
+  }, [route, isProjectRoute, projectId, isBlogRoute, blogId, isAllProjects, isAllBlogs])
 
   return (
     <div
@@ -131,27 +253,48 @@ function App() {
         if ((e.target as HTMLElement).tagName === 'IMG') e.preventDefault()
       }}
     >
-      <Navbar dark={dark} onToggleDark={handleToggleDark} />
-      <main className="flex-grow">
-        {isAllProjects ? (
-          <AllProjects />
-        ) : isAllBlogs ? (
-          <AllBlogs />
-        ) : isProjectRoute && projectId ? (
-          <ProjectDetail projectId={projectId} />
-        ) : isBlogRoute && blogId ? (
-          <BlogDetail blogId={blogId} />
-        ) : (
-          <>
-            <Hero />
-            <About />
-            <AboutTagline dark={dark} />
-            <Projects />
-            <Testimonials />
-            <Thoughts />
-            <Contact />
-          </>
-        )}
+      <Navbar dark={dark} onToggleDark={handleToggleDark} route={route} />
+      <main className="flex-grow overflow-visible relative">
+        <AnimatePresence mode="wait" onExitComplete={handleExitComplete}>
+          <motion.div
+            key={pageKey}
+            initial={{ opacity: 0, scale: 0.995 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.995 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {!isKnownRoute ? (
+              <div className="min-h-[100dvh] flex flex-col items-center justify-center gap-6 px-6 text-center bg-paper dark:bg-[#111111]">
+                <span className="text-[120px] font-extrabold text-zinc-200 dark:text-zinc-800 font-display leading-none select-none">404</span>
+                <p className="text-zinc-500 dark:text-zinc-400 text-sm font-sans max-w-[30ch]">This page doesn't exist. Head back home.</p>
+                <a
+                  href="#/"
+                  className="inline-flex items-center gap-2 text-xs font-bold text-offblack dark:text-zinc-100 border border-zinc-300 dark:border-zinc-700 rounded-full px-5 py-2.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                >
+                  ← Back home
+                </a>
+              </div>
+            ) : isAllProjects ? (
+              <AllProjects />
+            ) : isAllBlogs ? (
+              <AllBlogs />
+            ) : isProjectRoute && projectId ? (
+              <ProjectDetail projectId={projectId} />
+            ) : isBlogRoute && blogId ? (
+              <BlogDetail blogId={blogId} />
+            ) : (
+              <>
+                <Hero />
+                <About />
+                <AboutTagline dark={dark} />
+                <Projects />
+                <Testimonials />
+                <Thoughts />
+                <Contact />
+              </>
+            )}
+          </motion.div>
+        </AnimatePresence>
       </main>
       <Footer />
     </div>

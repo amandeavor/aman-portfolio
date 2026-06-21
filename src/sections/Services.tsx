@@ -21,7 +21,7 @@ const SERVICES = [
 
 export function Services() {
   return (
-    <section id="services" className="py-24 pt-40 border-t border-zinc-200/60 bg-paper px-6 select-none">
+    <section id="services" className="py-6 md:py-24 pt-10 md:pt-40 border-t border-zinc-200/60 bg-paper px-6 select-none">
       <div className="mx-auto max-w-4xl text-left">
         <h2 className="text-3xl font-bold tracking-tight text-offblack mb-12 font-display">
           Services

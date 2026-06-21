@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { motion } from 'motion/react'
 import { ArrowUpRight, ArrowLeft } from '@phosphor-icons/react'
 import { PROJECTS_DATA } from '../data/projects'
@@ -10,11 +9,6 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
   const otherProjects = Object.values(PROJECTS_DATA)
     .filter((p) => p.id !== project.id)
     .slice(0, 2) // display exactly 2 "More Projects"
-
-  // Automatically scroll to the top of the window on mount/project change
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [projectId])
 
   return (
     <section className="py-20 bg-paper dark:bg-[#111111] text-offblack dark:text-zinc-200 text-left">
@@ -109,11 +103,11 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
         </div>
 
         {/* 2-Column Showcase Mockups Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-20 h-[300px] sm:h-[350px]">
-          <div className="w-full h-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-28 md:mb-20 h-auto md:h-[300px] lg:h-[350px]">
+          <div className="w-full h-[240px] md:h-full">
             {project.showcaseLeft}
           </div>
-          <div className="w-full h-full">
+          <div className="w-full h-[240px] md:h-full">
             {project.showcaseRight}
           </div>
         </div>
@@ -193,6 +187,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
                   <img
                     src={p.coverImage}
                     alt={`${p.title} Hero`}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>

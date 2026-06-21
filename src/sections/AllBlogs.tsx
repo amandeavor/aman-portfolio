@@ -1,10 +1,8 @@
 import { motion } from 'motion/react'
 import { ArrowLeft } from '@phosphor-icons/react'
-import { useEffect } from 'react'
 import { BLOG_POSTS_LIST } from '../data/blogs'
 
 export function AllBlogs() {
-  useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
     <section className="py-20 select-none bg-paper dark:bg-[#111111] text-offblack dark:text-zinc-200 text-left">
@@ -45,6 +43,7 @@ export function AllBlogs() {
               <img
                 src={post.image}
                 alt={post.title}
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
               />
 

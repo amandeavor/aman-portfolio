@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { ArrowLeft, Clock } from '@phosphor-icons/react'
 import { BLOG_POSTS } from '../data/blogs'
 
@@ -9,11 +8,6 @@ export function BlogDetail({ blogId }: { blogId: string }) {
   const otherPosts = Object.values(BLOG_POSTS)
     .filter((p) => p.slug !== post.slug)
     .slice(0, 3) // show other 2 articles
-
-  // Automatically scroll to the top on load
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [blogId])
 
   return (
     <section className="py-20 bg-paper dark:bg-[#111111] text-offblack dark:text-zinc-200 text-left">
@@ -107,6 +101,7 @@ export function BlogDetail({ blogId }: { blogId: string }) {
                 <img
                   src={p.image}
                   alt={p.title}
+                  loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
                 />
 

@@ -3,26 +3,32 @@ import { ArrowUpRight } from '@phosphor-icons/react'
 import { PROJECTS_LIST } from '../data/projects'
 
 export function Projects() {
+  const featuredProjects = PROJECTS_LIST.filter(project =>
+    ['obsidiankit', 'aetheris-os', 'gurunanakacademy', 'aman-intelligence'].includes(project.id)
+  )
+
   return (
-    <section id="projects" className="py-24 bg-paper dark:bg-[#111111] px-6 select-none">
+    <section id="projects" className="py-6 md:py-24 bg-paper dark:bg-[#111111] px-6 select-none">
       <div className="mx-auto max-w-5xl">
         {/* Header */}
         <div className="flex flex-col sm:flex-row w-full items-start sm:items-end justify-between gap-6 mb-16">
           <h2 className="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight text-offblack dark:text-zinc-100 leading-[0.9] font-display">
             Featured<br />Projects
           </h2>
-          <a
+          <motion.a
             href="#/projects"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-offblack dark:text-zinc-200 border border-zinc-300 dark:border-zinc-700 rounded-full px-4 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors shadow-sm shrink-0"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-offblack dark:text-zinc-200 border border-zinc-300 dark:border-zinc-700 rounded-full px-4 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors shadow-sm shrink-0 group"
           >
             <span>View All Work</span>
-            <ArrowUpRight size={13} weight="bold" />
-          </a>
+            <ArrowUpRight size={13} weight="bold" className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+          </motion.a>
         </div>
 
         {/* 2-Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          {PROJECTS_LIST.map((project, idx) => {
+          {featuredProjects.map((project, idx) => {
             const delay = idx % 2 === 0 ? (idx === 0 ? 0 : 0.05) : 0.1
 
             return (
@@ -36,20 +42,20 @@ export function Projects() {
                 className="flex flex-col items-start text-left group cursor-pointer hover:opacity-95 transition-opacity"
               >
                 {/* Mockup Card Container */}
-                <div className="aspect-[4/3] w-full rounded-[28px] border border-zinc-200/60 dark:border-zinc-800/60 overflow-hidden mb-4 relative shadow-sm">
+                <div className="aspect-[4/3] w-full rounded-[20px] md:rounded-[28px] border border-zinc-200/60 dark:border-zinc-800/60 overflow-hidden mb-3 relative shadow-sm">
                   <img
                     src={project.coverImage}
                     alt={`${project.title} Mockup`}
-                    className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-700 ease-[0.16,1,0.3,1]"
                   />
                 </div>
 
                 {/* Project Title & Meta Info */}
-                <div className="flex flex-col items-start gap-0.5 pl-2 select-none">
-                  <h3 className="text-xl font-bold text-offblack dark:text-zinc-100 font-display group-hover:opacity-70 transition-opacity">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full mt-1 px-1 gap-2 select-none">
+                  <h3 className="text-xl md:text-2xl font-bold text-offblack dark:text-zinc-100 font-display group-hover:opacity-70 transition-opacity">
                     {project.title}
                   </h3>
-                  <span className="text-xs text-zinc-500 font-semibold">
+                  <span className="text-[9px] md:text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider border border-zinc-200 dark:border-zinc-800/70 px-2.5 py-0.5 rounded-full bg-zinc-100/40 dark:bg-zinc-900/40 w-fit shrink-0">
                     {project.category}
                   </span>
                 </div>

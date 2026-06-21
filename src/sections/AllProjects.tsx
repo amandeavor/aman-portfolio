@@ -1,10 +1,8 @@
 import { motion } from 'motion/react'
 import { ArrowLeft } from '@phosphor-icons/react'
-import { useEffect } from 'react'
 import { PROJECTS_LIST } from '../data/projects'
 
 export function AllProjects() {
-  useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
     <section className="py-20 select-none bg-paper dark:bg-[#111111] text-offblack dark:text-zinc-200 text-left">
@@ -42,20 +40,21 @@ export function AllProjects() {
               className="flex flex-col items-start text-left group cursor-pointer hover:opacity-95 transition-opacity"
             >
               {/* Mockup Card */}
-              <div className="aspect-[4/3] w-full rounded-[28px] border border-zinc-200/60 dark:border-zinc-800/60 overflow-hidden mb-4 relative shadow-sm">
+              <div className="aspect-[4/3] w-full rounded-[20px] md:rounded-[28px] border border-zinc-200/60 dark:border-zinc-800/60 overflow-hidden mb-3 relative shadow-sm">
                 <img
                   src={project.coverImage}
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-700 ease-[0.16,1,0.3,1]"
                 />
               </div>
 
               {/* Title & Meta */}
-              <div className="flex flex-col items-start gap-1 pl-1 mt-1">
-                <h3 className="text-2xl font-bold text-offblack dark:text-zinc-100 font-display tracking-tight group-hover:opacity-60 transition-opacity">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full mt-1 px-1 gap-2 select-none">
+                <h3 className="text-xl md:text-2xl font-bold text-offblack dark:text-zinc-100 font-display tracking-tight group-hover:opacity-60 transition-opacity">
                   {project.title}
                 </h3>
-                <span className="text-[13px] text-zinc-400 font-medium">
+                <span className="text-[9px] md:text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider border border-zinc-200 dark:border-zinc-800/70 px-2.5 py-0.5 rounded-full bg-zinc-100/40 dark:bg-zinc-900/40 w-fit shrink-0">
                   {project.category}
                 </span>
               </div>
