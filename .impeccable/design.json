@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-21T12:00:00Z",
+  "title": "Design System: Aman Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Off-Black Ink", "canonical": "oklch(18% 0 0)", "tonalRamp": ["#121212", "#27272a", "#3f3f46", "#52525b", "#71717a", "#a1a1aa", "#d4d4d8", "#e4e4e7"] },
+      "neutral-bg": { "role": "neutral", "displayName": "Warm Parchment", "canonical": "oklch(97.5% 0.005 60)", "tonalRamp": ["#FAF7F3", "#fcfbfa", "#f5f3f0", "#eceae6", "#e2e0dc", "#d8d6d2", "#ceccc8", "#c4c2be"] },
+      "accent-sandy": { "role": "neutral", "displayName": "Sandy Gray", "canonical": "oklch(93.5% 0.008 80)", "tonalRamp": ["#eae9e4", "#f4f3ef", "#fdfcf7", "#fbfaf5", "#f9f8f2", "#f7f6f0", "#f5f4ed", "#f3f2ea"] },
+      "accent-red": { "role": "accent", "displayName": "Crimson Red", "canonical": "oklch(38.5% 0.18 25)", "tonalRamp": ["#991b1b", "#b91c1c", "#dc2626", "#ef4444", "#f87171", "#fca5a5", "#fecaca", "#fee2e2"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display Text", "purpose": "Hero typewriter display headers only." },
+      "headline": { "displayName": "Headline Text", "purpose": "Section headings (Testimonials, Thoughts, Let's talk, Featured Projects)." }
+    },
+    "shadows": [
+      { "name": "active-indicator", "value": "0 4px 20px rgba(0,0,0,0.08)", "purpose": "Subtle indicators for active pill-based navigation." }
+    ],
+    "motion": [
+      { "name": "scroll-smooth", "value": "0.045 lerp", "purpose": "Buttery kinetic scroll damping." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Navigation Pill",
+      "kind": "nav",
+      "refersTo": "navbar-pill",
+      "description": "Floating black pill navigation centered at the top of the viewport.",
+      "html": "<div class=\"ds-nav-pill\"><span class=\"ds-logo\">Aman</span><button class=\"ds-menu-btn\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\"><circle cx=\"5\" cy=\"12\" r=\"2\" fill=\"currentColor\"/><circle cx=\"12\" cy=\"12\" r=\"2\" fill=\"currentColor\"/><circle cx=\"19\" cy=\"12\" r=\"2\" fill=\"currentColor\"/></svg></button></div>",
+      "css": ".ds-nav-pill { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 10px 8px 24px; background: #121212; color: #fff; border-radius: 9999px; width: 280px; font-family: 'Archivo', sans-serif; box-shadow: 0 4px 20px rgba(0,0,0,0.12); } .ds-logo { font-size: 14px; font-weight: 700; } .ds-menu-btn { width: 40px; height: 28px; border-radius: 9999px; background: #fff; border: none; display: flex; align-items: center; justify-content: center; color: #121212; cursor: pointer; transition: background 0.2s; } .ds-menu-btn:hover { background: #f4f3ef; }"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Bold sand-colored button used for form submits and navigation quick-links.",
+      "html": "<button class=\"ds-btn-primary\">SUBMIT</button>",
+      "css": ".ds-btn-primary { width: 100%; padding: 14px; background: #eae9e4; color: #121212; font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 700; border-radius: 12px; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s; } .ds-btn-primary:hover { background: #f4f3ef; transform: translateY(-1px); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Kinetic Grotesque",
+    "overview": "A visual framework structured around heavy, high-contrast grotesque typography (Archivo), centered layouts, and tactile warm paper textures combined with scrolltelling animations and 3D assets.",
+    "keyCharacteristics": [
+      "Archivo typography utilized sitewide in bold/black weights.",
+      "Clean flat-by-default border-driven layouts.",
+      "Bespoke 3D glossy assets stationary relative to text columns.",
+      "Buttery kinetic scrolling dynamics."
+    ],
+    "rules": [
+      { "name": "The Contrast Rule", "body": "Text colors must maintain a contrast ratio of at least 4.5:1. Muted gray body text is prohibited.", "section": "colors" },
+      { "name": "The Two-Line Cap Rule", "body": "Hero display headers are capped at exactly two lines using whitespace-nowrap.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. Dropshadows are prohibited except for small active hover states.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do position 3D decorative assets relative to static max-w-5xl containers.",
+      "Do stabilize heights on dynamic typewriter elements using zero-width spaces."
+    ],
+    "donts": [
+      "Don't use soft wide drop shadows on buttons and cards.",
+      "Don't wrap the display typewriter lines into a third line."
+    ]
+  }
+}

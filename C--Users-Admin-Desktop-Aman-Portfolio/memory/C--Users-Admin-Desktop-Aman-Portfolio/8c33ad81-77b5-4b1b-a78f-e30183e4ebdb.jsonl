@@ -1,0 +1,47 @@
+# Implementation Plan - Blog Detail Pages and 4-Blog Content Setup
+
+This plan details the steps to create **Blog Detail Pages** (with a clean, editorial layout matching the style of Image #67) for a total of **4 blog posts**, integrating them into the existing state-based hash router.
+
+## Context
+The user requested adding blog detail pages (similar in styling to the project detail pages) and expanding the thoughts/blog section to support a total of 4 blog posts.
+
+## Recommended Approach
+
+### 1. Define 4 Blog Posts Data
+We will create a comprehensive data structure for 4 distinct blog posts:
+1. `building-trust` (Building Trust Through Clear Design)
+2. `art-direction` (The Role of Art Direction in Branding)
+3. `scaling-startups` (Scaling Start-ups for Rapid Growth)
+4. `intentional-ux` (Intentional UX: The Art of Restraint)
+
+Each post will have:
+- Title, date, slug, and category metadata.
+- A high-quality placeholder image.
+- Rich editorial copy (3-4 paragraphs split into readable columns).
+
+### 2. Extend Hash-Based Router (`src/App.tsx`)
+- Update the router in `App.tsx`:
+  - If the hash starts with `#/blog/`, parse the `blogId` (slug) and render the new `<BlogDetail blogId={blogId} />` component.
+  - Keep Navbar and Footer visible on the blog detail page.
+
+### 3. Connect Thoughts Grid (`src/sections/Thoughts.tsx`)
+- In `Thoughts.tsx`:
+  - Update the two blog post card containers to be `motion.a` components linking to their respective hash paths (`href={`#/blog/${post.slug}`}`).
+  - Map the third card (Dark CTA Card)'s button `"Read Blog"` to point to the first blog post (`#/blog/building-trust`) or the blog route, allowing navigation.
+
+### 4. Create Blog Detail Component (`src/sections/BlogDetail.tsx`)
+- Create a new component `src/sections/BlogDetail.tsx` that:
+  - Displays the active blog post using a clean, editorial layout.
+  - Renders a large header image.
+  - Renders the post content across 2 columns (using Archivo 400).
+  - Displays a "More Articles" section at the bottom, listing cards for the other 3 blog posts so the user can easily browse all 4 blogs.
+  - Automatically scrolls to the top of the window on mount.
+
+## Critical Files to Create/Modify
+- `src/sections/BlogDetail.tsx` (New file)
+- `src/sections/Thoughts.tsx` (Update to use `motion.a` links and slug data)
+- `src/App.tsx` (Update routing logic to handle `#/blog/`)
+
+## Verification Plan
+1. **Compilation Check**: Run `npm run build` to verify the code compiles without warnings.
+2. **Local Preview**: Run `npm run dev`, verify that clicking any blog card on the landing page opens the correct blog detail page, and all 4 blogs are accessible via the "More Articles" section at the bottom.

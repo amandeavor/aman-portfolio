@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Archivo', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Archivo', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --color-paper: #FAF7F3;
+  --color-offblack: #121212;
+}
+
+/* Enable class-based dark mode */
+@variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+    view-transition-name: root;
+  }
+
+  body {
+    @apply bg-paper text-offblack antialiased selection:bg-offblack selection:text-zinc-50;
+    overflow-x: clip;
+  }
+
+  .dark body {
+    background-color: #111111;
+    color: #e4e4e7;
+  }
+
+  .dark {
+    --color-paper: #111111;
+    --color-offblack: #e4e4e7;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+
+  img:not(.no-outline) {
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+    outline: 1px solid rgba(0, 0, 0, 0.08);
+    outline-offset: 0px;
+  }
+
+  .dark img:not(.no-outline) {
+    outline: 1px solid rgba(255, 255, 255, 0.10);
+  }
+}
+
+/* Disable the browser's default cross-fade — we inject our own clip-path animation */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Smooth typewriter cursor blink */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  border-radius: 1px;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: cursor-blink 1.1s ease-in-out infinite;
+}
+
+/* Custom scrollbar for textareas */
+textarea::-webkit-scrollbar { width: 6px; }
+textarea::-webkit-scrollbar-track { background: transparent; }
+textarea::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+textarea::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
