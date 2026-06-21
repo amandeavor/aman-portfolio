@@ -73,7 +73,7 @@ export function About() {
   const desktopFilter = useTransform(smoothScroll, [448, 452], ['grayscale(100%)', 'grayscale(0%)'])
 
   // Mobile animations
-  const mobileY = useTransform(smoothScroll, [0, 700], [-800, 0])
+  const mobileY = useTransform(smoothScroll, [0, 700], ['-70vh', '0vh'])
   const mobileScale = useTransform(smoothScroll, [0, 700], [0.65, 1])
   const mobileRotateY = useTransform(smoothScroll, [0, 700], [0, 180])
   const mobileScaleX = useTransform(smoothScroll, [349, 351], [1, -1])
@@ -112,11 +112,11 @@ export function About() {
             <div className="md:col-span-4 flex justify-center py-4 overflow-visible" style={{ perspective: '1200px' }}>
               <motion.div
                 style={{ y, scale, rotateY, filter }}
-                className="w-[245px] h-[300px] min-[375px]:w-[280px] min-[375px]:h-[340px] sm:w-[300px] sm:h-[360px] md:w-[320px] md:h-[380px] rounded-[24px] shadow-xl relative shrink-0 z-30 [transform-style:preserve-3d]"
+                className="w-[160px] h-[200px] min-[375px]:w-[185px] min-[375px]:h-[235px] sm:w-[220px] sm:h-[280px] md:w-[320px] md:h-[380px] rounded-[20px] md:rounded-[24px] shadow-xl relative shrink-0 z-30 [transform-style:preserve-3d]"
               >
                 <motion.div
                   style={{ backgroundColor: bgColor, scaleX }}
-                  className="absolute inset-0 rounded-[24px] overflow-hidden border border-red-800"
+                  className="absolute inset-0 rounded-[inherit] overflow-hidden border border-red-800"
                 >
                   <img
                     src={avatarImg}

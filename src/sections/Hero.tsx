@@ -79,12 +79,12 @@ export function Hero() {
   }, [])
 
   return (
-    <section className="relative flex flex-col justify-between h-[100dvh] min-h-[100dvh] w-full py-10 px-6 sm:px-10 select-none overflow-visible bg-paper dark:bg-[#111111]">
+    <section className="relative flex flex-col h-[100dvh] min-h-[100dvh] w-full py-10 px-6 sm:px-10 select-none overflow-visible bg-paper dark:bg-[#111111]">
       {/* Top Spacer for floating navbar */}
       <div className="h-16 shrink-0" />
 
       {/* Middle Display Heading */}
-      <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center">
+      <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-start md:justify-center flex-grow pt-10 md:pt-0">
         {/* Left Spark */}
         <div className="absolute left-[2%] sm:left-[0%] md:left-[-6%] top-[-15%] sm:top-[-8%] md:top-[-6%] z-10 pointer-events-none">
           <img
