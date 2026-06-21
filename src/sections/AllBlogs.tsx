@@ -37,7 +37,7 @@ export function AllBlogs() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.75, delay: idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
-              className="relative rounded-[24px] overflow-hidden border border-zinc-200/40 dark:border-zinc-800/40 shadow-md group cursor-pointer block hover:opacity-95 transition-opacity h-[320px]"
+              className="relative rounded-[24px] overflow-hidden border border-zinc-200/40 dark:border-zinc-800/40 shadow-md group cursor-pointer block hover:opacity-95 transition-opacity h-[320px] bg-zinc-100/50 dark:bg-zinc-900/50"
             >
               {/* Grayscale image */}
               <img

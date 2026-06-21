@@ -42,7 +42,7 @@ export function Projects() {
                 className="flex flex-col items-start text-left group cursor-pointer hover:opacity-95 transition-opacity"
               >
                 {/* Mockup Card Container */}
-                <div className="aspect-[4/3] w-full rounded-[20px] md:rounded-[28px] border border-zinc-200/60 dark:border-zinc-800/60 overflow-hidden mb-3 relative shadow-sm">
+                <div className="aspect-[4/3] w-full rounded-[20px] md:rounded-[28px] border border-zinc-200/60 dark:border-zinc-800/60 overflow-hidden mb-3 relative shadow-sm bg-zinc-100/50 dark:bg-zinc-900/50">
                   <img
                     src={project.coverImage}
                     alt={`${project.title} Mockup`}

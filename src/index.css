@@ -43,10 +43,16 @@
     pointer-events: none;
     outline: 1px solid rgba(0, 0, 0, 0.08);
     outline-offset: 0px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
   }
 
   .dark img:not(.no-outline) {
     outline: 1px solid rgba(255, 255, 255, 0.10);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
   }
 }
 
