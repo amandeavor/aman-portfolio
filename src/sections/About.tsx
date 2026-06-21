@@ -73,7 +73,7 @@ export function About() {
   const desktopFilter = useTransform(smoothScroll, [448, 452], ['grayscale(100%)', 'grayscale(0%)'])
 
   // Mobile animations
-  const mobileY = useTransform(smoothScroll, [0, 700], ['-82vh', '0vh'])
+  const mobileY = useTransform(smoothScroll, [0, 700], ['-94vh', '0vh'])
   const mobileScale = useTransform(smoothScroll, [0, 700], [0.65, 1])
   const mobileRotateY = useTransform(smoothScroll, [0, 700], [0, 180])
   const mobileScaleX = useTransform(smoothScroll, [349, 351], [1, -1])
@@ -99,7 +99,7 @@ export function About() {
             {/* Left Column */}
             <div className="md:col-span-4 flex flex-col items-start h-full justify-between py-2">
               <div>
-                <h2 className="text-7xl md:text-8xl font-semibold tracking-tight text-offblack dark:text-zinc-100 mb-12 font-display">
+                <h2 className="text-7xl md:text-8xl font-semibold tracking-tight text-offblack dark:text-zinc-100 mb-6 md:mb-12 font-display">
                   Hey!
                 </h2>
                 <p className="text-offblack dark:text-zinc-300 text-base font-bold leading-snug max-w-[20ch]">
@@ -109,7 +109,7 @@ export function About() {
             </div>
 
             {/* Center Column (Animated Portrait Avatar Card) */}
-            <div className="md:col-span-4 flex justify-center py-4 overflow-visible" style={{ perspective: '1200px' }}>
+            <div className="md:col-span-4 flex justify-center py-2 md:py-4 overflow-visible" style={{ perspective: '1200px' }}>
               <motion.div
                 style={{ y, scale, rotateY, filter }}
                 className="w-[160px] h-[200px] min-[375px]:w-[185px] min-[375px]:h-[235px] sm:w-[220px] sm:h-[280px] md:w-[320px] md:h-[380px] rounded-[20px] md:rounded-[24px] shadow-xl relative shrink-0 z-30 [transform-style:preserve-3d]"
