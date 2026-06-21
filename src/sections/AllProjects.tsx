@@ -45,7 +45,8 @@ export function AllProjects() {
                   src={project.coverImage}
                   alt={project.title}
                   loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-700 ease-[0.16,1,0.3,1]"
+                  decoding="sync"
+                  className="w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-700 ease-[0.16,1,0.3,1] will-change-transform"
                 />
               </div>
 

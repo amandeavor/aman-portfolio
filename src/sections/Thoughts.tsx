@@ -30,7 +30,8 @@ export function Thoughts() {
               <img
                 src={post.image}
                 alt={post.title}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                decoding="sync"
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 will-change-transform"
               />
 
               {/* Dark Gradient Overlay */}
