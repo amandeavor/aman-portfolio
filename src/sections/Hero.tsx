@@ -85,25 +85,25 @@ export function Hero() {
 
       {/* Middle Display Heading */}
       <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-start md:justify-center flex-grow pt-10 md:pt-0">
-        {/* Left Spark */}
-        <div className="absolute left-[2%] sm:left-[0%] md:left-[-6%] top-[-15%] sm:top-[-8%] md:top-[-6%] z-10 pointer-events-none">
-          <img
-            src={starImg}
-            alt="Star"
-            className="w-[45px] h-[45px] min-[375px]:w-[65px] min-[375px]:h-[65px] sm:w-[110px] sm:h-[110px] md:w-[140px] md:h-[140px] object-contain no-outline"
-          />
-        </div>
+        <h1 className="relative flex flex-col items-center justify-center font-display text-center select-none max-w-5xl leading-none w-full">
+          {/* Left Spark */}
+          <div className="absolute -left-1 sm:left-[-35px] md:left-[-80px] -top-10 sm:-top-16 md:-top-10 z-10 pointer-events-none">
+            <img
+              src={starImg}
+              alt="Star"
+              className="w-[32px] h-[32px] min-[375px]:w-[42px] min-[375px]:h-[42px] sm:w-[90px] sm:h-[90px] md:w-[140px] md:h-[140px] object-contain no-outline"
+            />
+          </div>
 
-        {/* Right Spark */}
-        <div className="absolute right-[2%] sm:right-[0%] md:right-[-6%] bottom-[5%] sm:bottom-[12%] md:bottom-[14%] z-10 pointer-events-none">
-          <img
-            src={boltImg}
-            alt="Lightning Bolt"
-            className="w-[55px] h-[55px] min-[375px]:w-[75px] min-[375px]:h-[75px] sm:w-[125px] sm:h-[125px] md:w-[160px] md:h-[160px] object-contain no-outline"
-          />
-        </div>
+          {/* Right Spark */}
+          <div className="absolute -right-1 sm:right-[-35px] md:right-[-80px] -bottom-8 sm:-bottom-16 md:-bottom-10 z-10 pointer-events-none">
+            <img
+              src={boltImg}
+              alt="Lightning Bolt"
+              className="w-[42px] h-[42px] min-[375px]:w-[52px] min-[375px]:h-[52px] sm:w-[100px] sm:h-[100px] md:w-[160px] md:h-[160px] object-contain no-outline"
+            />
+          </div>
 
-        <h1 className="flex flex-col items-center justify-center font-display text-center select-none max-w-5xl leading-none">
           {/* Line 1 */}
           <span className="text-[6.5vw] min-[375px]:text-[7vw] sm:text-[8vw] font-extrabold tracking-[-0.03em] text-offblack dark:text-zinc-100 uppercase whitespace-nowrap block min-h-[1.1em]">
             {display.line1 || '​'}

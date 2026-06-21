@@ -73,7 +73,7 @@ export function About() {
   const desktopFilter = useTransform(smoothScroll, [448, 452], ['grayscale(100%)', 'grayscale(0%)'])
 
   // Mobile animations
-  const mobileY = useTransform(smoothScroll, [0, 700], ['-70vh', '0vh'])
+  const mobileY = useTransform(smoothScroll, [0, 700], ['-82vh', '0vh'])
   const mobileScale = useTransform(smoothScroll, [0, 700], [0.65, 1])
   const mobileRotateY = useTransform(smoothScroll, [0, 700], [0, 180])
   const mobileScaleX = useTransform(smoothScroll, [349, 351], [1, -1])
