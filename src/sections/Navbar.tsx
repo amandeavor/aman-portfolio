@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useScroll } from 'motion/react'
+import { motion } from 'motion/react'
 import { Moon, Sun } from '@phosphor-icons/react'
 
 const navItems = [
@@ -12,14 +12,10 @@ const navItems = [
 interface NavbarProps {
   dark: boolean
   onToggleDark: (btn: HTMLButtonElement | null) => void
-  route?: string
 }
 
-export function Navbar({ dark, onToggleDark, route }: NavbarProps) {
+export function Navbar({ dark, onToggleDark }: NavbarProps) {
   const btnRef = useRef<HTMLButtonElement>(null)
-  const { scrollYProgress } = useScroll()
-
-  const isDetailRoute = route ? (route.startsWith('#/project/') || route.startsWith('#/blog/')) : false
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault()
@@ -32,12 +28,13 @@ export function Navbar({ dark, onToggleDark, route }: NavbarProps) {
       currentHash === '#/blog'
 
     if (isDetail) {
+      // eslint-disable-next-line react-hooks/immutability
       window.location.hash = '#/'
       // Wait for home page to mount then scroll
       setTimeout(() => {
         const el = document.getElementById(sectionId)
         if (el) {
-          const lenis = (window as any).lenis
+          const lenis = window.lenis
           if (lenis) {
             lenis.scrollTo(el, { offset: -80, duration: 1.2 })
           } else {
@@ -48,8 +45,7 @@ export function Navbar({ dark, onToggleDark, route }: NavbarProps) {
     } else {
       const el = document.getElementById(sectionId)
       if (el) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const lenis = (window as any).lenis
+        const lenis = window.lenis
         if (lenis) {
           lenis.scrollTo(el, { offset: -80, duration: 1.2 })
         } else {
@@ -60,73 +56,63 @@ export function Navbar({ dark, onToggleDark, route }: NavbarProps) {
   }
 
   return (
-    <motion.div
+    <motion.header
       initial={{ y: -20, opacity: 0, x: '-50%' }}
       animate={{ y: 0, opacity: 1, x: '-50%' }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-6 left-1/2 z-50 flex items-center gap-2 sm:gap-3 pl-3 min-[375px]:pl-5 pr-2 py-2 rounded-full select-none bg-[#121212]/55 backdrop-blur-[16px] border border-white/8 shadow-[0_4px_24px_rgba(0,0,0,0.18)] w-[92vw] sm:w-[clamp(290px,68vw,480px)]"
+      className="fixed top-3 sm:top-6 left-1/2 z-50 rounded-full select-none bg-[#121212]/72 backdrop-blur-[16px] border border-white/10 shadow-[0_6px_22px_rgba(0,0,0,0.18)] w-[calc(100vw-0.75rem)] max-w-[500px] sm:w-[clamp(330px,64vw,500px)]"
     >
-      {/* Scroll Reading Progress Bar */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: isDetailRoute ? 1 : 0
-        }}
-        style={{
-          scaleX: isDetailRoute ? scrollYProgress : 0,
-          transformOrigin: 'left'
-        }}
-        transition={{ opacity: { duration: 0.25 } }}
-        className="absolute top-0 left-6 right-6 h-[2px] bg-white dark:bg-zinc-400 rounded-full z-10"
-      />
-      {/* Brand */}
-      <motion.a
-        href="#/"
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.97 }}
-        className="text-sm font-bold tracking-tight text-white font-display shrink-0 hidden min-[375px]:block"
-      >
-        Aman
-      </motion.a>
-
-      {/* Separator */}
-      <div className="w-[1px] h-4 bg-white/15 shrink-0 hidden min-[375px]:block" />
-
-      {/* Nav links */}
-      <div className="flex items-center gap-0.5 flex-1 justify-center min-[375px]:justify-start">
-        {navItems.map((item) => (
-          <motion.a
-            key={item.label}
-            href={`#${item.sectionId}`}
-            onClick={(e) => handleNavClick(e, item.sectionId)}
-            whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 0.08)" }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[9px] min-[375px]:text-[10px] sm:text-[11px] font-semibold text-zinc-400 hover:text-white px-1.5 min-[375px]:px-2.5 sm:px-3 py-1.5 rounded-full"
-          >
-            {item.label}
-          </motion.a>
-        ))}
-      </div>
-
-      {/* Dark mode toggle */}
-      <motion.button
-        ref={btnRef}
-        onClick={() => onToggleDark(btnRef.current)}
-        whileTap={{ scale: 0.9 }}
-        className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-zinc-300 hover:text-white transition-colors shrink-0 cursor-pointer"
-        aria-label="Toggle dark mode"
-      >
-        <motion.span
-          key={dark ? 'sun' : 'moon'}
-          initial={{ rotate: -30, opacity: 0, scale: 0.7 }}
-          animate={{ rotate: 0, opacity: 1, scale: 1 }}
-          transition={{ duration: 0.25, ease: 'easeOut' }}
+      <nav aria-label="Primary" className="relative flex items-center gap-0.5 min-[370px]:gap-1 sm:gap-2 px-1.5 py-1.5 min-[405px]:pl-3">
+        {/* Brand */}
+        <motion.a
+          href="#/"
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className="hidden min-[405px]:inline-flex min-h-11 items-center rounded-full px-2 text-sm font-bold tracking-normal text-white font-display shrink-0 focus-visible:ring-2 focus-visible:ring-white/35 focus-visible:ring-offset-0"
         >
-          {dark ? <Sun size={14} weight="bold" /> : <Moon size={14} weight="bold" />}
-        </motion.span>
-      </motion.button>
-    </motion.div>
+          Aman
+        </motion.a>
+
+        {/* Separator */}
+        <div className="w-[1px] h-4 bg-white/15 shrink-0 hidden min-[405px]:block" aria-hidden="true" />
+
+        {/* Nav links */}
+        <div className="flex min-w-0 flex-1 items-center justify-center gap-0.5 min-[405px]:justify-start">
+          {navItems.map((item) => (
+            <motion.a
+              key={item.label}
+              href={`#${item.sectionId}`}
+              onClick={(e) => handleNavClick(e, item.sectionId)}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-1.5 min-[340px]:px-2 min-[375px]:px-2.5 sm:px-3 text-[11px] min-[370px]:text-xs sm:text-[13px] font-semibold tracking-normal text-zinc-300 hover:bg-white/[0.08] hover:text-white focus-visible:bg-white/[0.10] focus-visible:text-white focus-visible:ring-2 focus-visible:ring-white/35 focus-visible:ring-offset-0 transition-colors"
+            >
+              {item.label}
+            </motion.a>
+          ))}
+        </div>
+
+        {/* Dark mode toggle */}
+        <motion.button
+          ref={btnRef}
+          onClick={() => onToggleDark(btnRef.current)}
+          whileTap={{ scale: 0.9 }}
+          className="w-11 h-11 rounded-full bg-white/10 hover:bg-white/[0.18] flex items-center justify-center text-zinc-200 hover:text-white focus-visible:ring-2 focus-visible:ring-white/35 focus-visible:ring-offset-0 transition-colors shrink-0 cursor-pointer"
+          aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+          type="button"
+        >
+          <motion.span
+            key={dark ? 'sun' : 'moon'}
+            initial={{ rotate: -30, opacity: 0, scale: 0.7 }}
+            animate={{ rotate: 0, opacity: 1, scale: 1 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            aria-hidden="true"
+          >
+            {dark ? <Sun size={16} weight="bold" /> : <Moon size={16} weight="bold" />}
+          </motion.span>
+        </motion.button>
+      </nav>
+    </motion.header>
   )
 }
-

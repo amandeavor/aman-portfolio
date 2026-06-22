@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react'
 
 import obsidianImg from '../assets/obsidiankit-cover.webp'
-import aetherisImg from '../assets/aetheris.webp'
+import aetherisImg from '../assets/AetherisOS.png'
 import gurunanakImg from '../assets/gurunanakacademy.webp'
 import sweeprImg from '../assets/sweepr.webp'
 import momentumImg from '../assets/momentum.webp'
-import intelligenceImg from '../assets/aman-intelligence-cli.webp'
+import intelligenceImg from '../assets/AmanIntelligence.png'
 
 export interface Project {
   id: string
