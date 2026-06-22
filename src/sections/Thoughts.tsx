@@ -61,32 +61,38 @@ export function Thoughts() {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.85, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
-            whileHover={shouldReduceMotion ? undefined : { y: -3 }}
-            whileTap={shouldReduceMotion ? undefined : { scale: 0.985 }}
-            className="bg-[#0c0c0e] text-zinc-100 p-5 min-[520px]:p-3 md:p-6 rounded-[16px] md:rounded-[24px] border border-zinc-800/60 shadow-md flex flex-col justify-between h-[280px] sm:h-[360px] md:h-[420px] w-full group cursor-pointer hover:bg-[#111113] hover:border-zinc-700 focus-visible:border-zinc-500 transition-colors"
+            whileHover={shouldReduceMotion ? undefined : { y: -5, scale: 1.005 }}
+            whileTap={shouldReduceMotion ? undefined : { scale: 0.975 }}
+            className="bg-[#0c0c0e] text-zinc-100 p-5 min-[520px]:p-3 md:p-6 rounded-[16px] md:rounded-[24px] border border-zinc-800/60 shadow-md flex flex-col justify-between h-[280px] sm:h-[360px] md:h-[420px] w-full group cursor-pointer hover:bg-[#121215] hover:border-zinc-600/80 focus-visible:border-zinc-500 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
           >
             {/* Header Text */}
-            <h3 className="text-2xl min-[520px]:text-sm sm:text-xl md:text-2xl font-bold tracking-normal leading-[1.08] font-display text-zinc-50 max-w-full mt-1 md:mt-4">
+            <h3 className="text-2xl min-[520px]:text-sm sm:text-xl md:text-2xl font-bold tracking-normal leading-[1.08] font-display text-zinc-50 group-hover:text-white transition-colors duration-300 max-w-full mt-1 md:mt-4">
               Explore essays on engineering clarity and product craft
             </h3>
 
-            {/* View All Work Button */}
+            {/* View All Thoughts Button */}
             <div className="inline-flex min-h-11 items-center gap-2.5 text-xs min-[520px]:text-[10px] md:text-xs font-bold text-zinc-200 w-fit mb-1 md:mb-4">
-              <motion.span
-                animate={{ x: 0 }}
-                whileHover={shouldReduceMotion ? undefined : { x: 2 }}
-                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                className="relative transition-transform duration-300 after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-zinc-100 after:transition-transform after:duration-300 group-hover:translate-x-0.5 group-hover:after:scale-x-100"
+              <span
+                className="relative transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-zinc-100 after:transition-transform after:duration-300 group-hover:translate-x-0.5 group-hover:after:scale-x-100"
               >
                 View All Thoughts
-              </motion.span>
-              <motion.span
-                whileHover={shouldReduceMotion ? undefined : { x: 3, y: -3, rotate: 8 }}
-                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                className="w-7 h-7 min-[520px]:w-6 min-[520px]:h-6 md:w-[28px] md:h-[28px] rounded-lg border border-zinc-700 bg-zinc-950 flex items-center justify-center text-zinc-200 transition-[background-color,border-color,color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:rotate-[6deg] group-hover:bg-zinc-100 group-hover:text-[#0c0c0e] group-hover:border-zinc-100"
+              </span>
+              <span
+                className="w-7 h-7 min-[520px]:w-6 min-[520px]:h-6 md:w-[28px] md:h-[28px] rounded-lg border border-zinc-700 bg-zinc-950 flex items-center justify-center text-zinc-200 transition-[background-color,border-color,color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-zinc-100 group-hover:text-[#0c0c0e] group-hover:border-zinc-100 overflow-hidden relative"
               >
-                <ArrowUpRight className="w-3 h-3" weight="bold" aria-hidden="true" />
-              </motion.span>
+                <span className="relative w-3 h-3 overflow-hidden block">
+                  <ArrowUpRight
+                    className="absolute inset-0 w-full h-full transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-full group-hover:-translate-y-full"
+                    weight="bold"
+                    aria-hidden="true"
+                  />
+                  <ArrowUpRight
+                    className="absolute inset-0 w-full h-full -translate-x-full translate-y-full transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0"
+                    weight="bold"
+                    aria-hidden="true"
+                  />
+                </span>
+              </span>
             </div>
           </motion.a>
         </div>
