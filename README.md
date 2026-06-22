@@ -2,7 +2,7 @@
 
 Welcome to the official repository for my personal developer portfolio site—a performance-first, custom-designed, and interactive showcase built to highlight my work in software engineering, systems design, and frontend interfaces.
 
-✨ **Live Site:** [portfolio.amandeavor.me](https://portfolio.amandeavor.me) (or check out [github.com/amandeavor/aman-portfolio](https://github.com/amandeavor/aman-portfolio))
+✨ **Live Site:** [amandeavor.netlify.app](https://amandeavor.netlify.app) (or check out [github.com/amandeavor/aman-portfolio](https://github.com/amandeavor/aman-portfolio))
 
 ---
 
@@ -96,6 +96,7 @@ npm run preview
 
 ---
 
-## 📄 License
-This repository is open source. Feel free to explore, fork, and use details for your own projects.
+## 📄 License & Restrictions
+This project is proprietary and copyright-protected. It is **not meant to be copied, cloned, or redistributed** for personal or commercial use.
+
 🛠️ Developed with passion by [Aman](https://github.com/amandeavor).
