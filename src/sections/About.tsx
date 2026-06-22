@@ -203,7 +203,7 @@ export function About() {
                 >
                   <img
                     src={avatarImg}
-                    alt="Aman"
+                    alt="Aman — Software Engineer Portrait"
                     loading="eager"
                     fetchPriority="high"
                     width={640}
