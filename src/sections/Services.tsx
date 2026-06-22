@@ -21,13 +21,13 @@ const SERVICES = [
 
 export function Services() {
   return (
-    <section id="services" className="py-6 md:py-24 pt-10 md:pt-40 border-t border-zinc-200/60 bg-paper px-6 select-none">
+    <section id="services" aria-labelledby="services-title" className="py-6 md:py-24 pt-10 md:pt-40 border-t border-zinc-200/60 bg-paper dark:bg-[#111111] px-4 min-[360px]:px-6 select-none">
       <div className="mx-auto max-w-4xl text-left">
-        <h2 className="text-3xl font-bold tracking-tight text-offblack mb-12 font-display">
+        <h2 id="services-title" className="text-3xl font-bold tracking-normal text-offblack dark:text-zinc-100 mb-12 font-display">
           Services
         </h2>
 
-        <div className="divide-y divide-zinc-200/80 border-t border-b border-zinc-200/80">
+        <div className="divide-y divide-zinc-200/80 dark:divide-zinc-800/80 border-t border-b border-zinc-200/80 dark:border-zinc-800/80">
           {SERVICES.map((service, idx) => (
             <motion.div
               key={idx}
@@ -37,10 +37,10 @@ export function Services() {
               transition={{ duration: 0.5, delay: idx * 0.05 }}
               className="py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 group cursor-pointer"
             >
-              <span className="text-lg font-bold text-offblack group-hover:text-zinc-600 transition-colors duration-200 font-display">
+              <span className="text-lg font-bold text-offblack dark:text-zinc-100 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors duration-200 font-display">
                 {service.title}
               </span>
-              <span className="text-[11px] font-bold text-zinc-400 tracking-wider uppercase">
+              <span className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400 tracking-normal uppercase">
                 {service.tags}
               </span>
             </motion.div>

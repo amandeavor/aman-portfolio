@@ -11,58 +11,58 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
     .slice(0, 2) // display exactly 2 "More Projects"
 
   return (
-    <section className="py-20 bg-paper dark:bg-[#111111] text-offblack dark:text-zinc-200 text-left">
-      <div className="mx-auto max-w-5xl px-6">
+    <article aria-labelledby="project-title" className="py-20 bg-paper dark:bg-[#111111] text-offblack dark:text-zinc-200 text-left">
+      <div className="mx-auto max-w-5xl px-4 min-[360px]:px-6">
 
         {/* Back Link */}
         <div className="mb-10">
           <a
             href="#/"
-            className="inline-flex items-center gap-2 text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-offblack dark:hover:text-zinc-100 transition-colors uppercase tracking-wider"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full pr-2 text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:text-offblack dark:hover:text-zinc-100 transition-colors uppercase tracking-normal"
           >
-            <ArrowLeft size={14} weight="bold" />
+            <ArrowLeft size={14} weight="bold" aria-hidden="true" />
             <span>Back to all projects</span>
           </a>
         </div>
 
         {/* Title Block */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight text-offblack dark:text-zinc-100 leading-[0.9] font-display mb-6">
+        <h1 id="project-title" className="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-normal text-offblack dark:text-zinc-100 leading-[0.95] font-display mb-6">
           {project.title}
         </h1>
 
-        <p className="text-zinc-500 text-sm sm:text-base md:text-lg leading-relaxed max-w-[85ch] mb-10 font-sans">
+        <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base md:text-lg leading-[1.65] max-w-[70ch] mb-10 font-sans">
           {project.tagline}
         </p>
 
         {/* Metadata Strip */}
         <div className="flex flex-wrap items-center gap-x-10 gap-y-6 mb-16 font-sans">
           <div className="flex flex-col gap-1.5">
-            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Category</span>
+            <span className="text-[10px] font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-normal">Category</span>
             <span className="text-base font-bold text-offblack dark:text-zinc-100">{project.category}</span>
           </div>
           <div className="w-[1px] h-10 bg-zinc-300/40 dark:bg-zinc-700/40 hidden sm:block" />
           <div className="flex flex-col gap-1.5">
-            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Year</span>
+            <span className="text-[10px] font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-normal">Year</span>
             <span className="text-base font-bold text-offblack dark:text-zinc-100">{project.year}</span>
           </div>
           <div className="w-[1px] h-10 bg-zinc-300/40 dark:bg-zinc-700/40 hidden sm:block" />
           <div className="flex flex-col gap-1.5">
-            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest font-sans">Project Link</span>
+            <span className="text-[10px] font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-normal font-sans">Project Link</span>
             <motion.a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ x: 2 }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-              className="inline-flex items-center gap-1.5 text-base font-bold text-offblack dark:text-zinc-100 group"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-full pr-2 text-base font-bold text-offblack dark:text-zinc-100 group"
             >
-              <span className="group-hover:underline underline-offset-2 transition-all">Link</span>
+              <span className="group-hover:underline underline-offset-2 transition-colors">Link</span>
               <motion.span
                 whileHover={{ x: 2, y: -2 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                 className="w-6 h-6 rounded-full border border-zinc-300 dark:border-zinc-600 flex items-center justify-center group-hover:bg-offblack dark:group-hover:bg-zinc-100 group-hover:border-offblack dark:group-hover:border-zinc-100 group-hover:text-white dark:group-hover:text-offblack transition-colors"
               >
-                <ArrowUpRight size={12} weight="bold" />
+                <ArrowUpRight size={12} weight="bold" aria-hidden="true" />
               </motion.span>
             </motion.a>
           </div>
@@ -76,6 +76,11 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
           <img
             src={project.coverImage}
             alt={`${project.title} Hero`}
+            loading="eager"
+            fetchPriority="high"
+            decoding="sync"
+            width={1200}
+            height={675}
             className="w-full h-full object-cover"
           />
         </div>
@@ -86,7 +91,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
             <h3 className="text-xl md:text-2xl font-bold font-display text-offblack dark:text-zinc-100">
               About the Project
             </h3>
-            <div className="space-y-4 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed font-sans">
+            <div className="space-y-4 text-sm text-zinc-600 dark:text-zinc-400 leading-[1.65] font-sans">
               {project.aboutParagraphs.map((p, idx) => (
                 <p key={idx}>{p}</p>
               ))}
@@ -96,7 +101,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
             <h3 className="text-xl md:text-2xl font-bold font-display text-offblack dark:text-zinc-100">
               {project.flexibilityHeading}
             </h3>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed font-sans">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-[1.65] font-sans">
               {project.flexibilityText}
             </p>
           </div>
@@ -118,7 +123,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
             <h3 className="text-lg md:text-xl font-bold font-display text-offblack dark:text-zinc-100">
               {project.visualLanguageHeading}
             </h3>
-            <div className="space-y-3 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed font-sans">
+            <div className="space-y-3 text-sm text-zinc-600 dark:text-zinc-400 leading-[1.65] font-sans">
               <p>{project.visualLanguageText1}</p>
               <p>{project.visualLanguageText2}</p>
             </div>
@@ -127,7 +132,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
             <h3 className="text-lg md:text-xl font-bold font-display text-offblack dark:text-zinc-100">
               {project.structuredStorytellingHeading}
             </h3>
-            <div className="space-y-3 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed font-sans">
+            <div className="space-y-3 text-sm text-zinc-600 dark:text-zinc-400 leading-[1.65] font-sans">
               <p>{project.structuredStorytellingText1}</p>
               <p>{project.structuredStorytellingText2}</p>
             </div>
@@ -136,7 +141,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
             <h3 className="text-lg md:text-xl font-bold font-display text-offblack dark:text-zinc-100">
               {project.builtForRealUseHeading}
             </h3>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed font-sans">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-[1.65] font-sans">
               {project.builtForRealUseText}
             </p>
           </div>
@@ -153,7 +158,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
             <h3 className="text-xl md:text-2xl font-bold font-display text-[#121212] dark:text-zinc-100">
               {project.growthHeading}
             </h3>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed font-sans">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-[1.65] font-sans">
               {project.growthText}
             </p>
           </div>
@@ -161,7 +166,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
             <h3 className="text-xl md:text-2xl font-bold font-display text-[#121212] dark:text-zinc-100">
               {project.clarityHeading}
             </h3>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed font-sans">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-[1.65] font-sans">
               {project.clarityText}
             </p>
           </div>
@@ -169,7 +174,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
 
         {/* More Projects Section */}
         <div className="border-t border-zinc-200/60 dark:border-zinc-800/60 pt-16">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-offblack dark:text-zinc-100 font-display mb-12">
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-normal text-offblack dark:text-zinc-100 font-display mb-12">
             More Projects
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
@@ -177,7 +182,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
               <a
                 key={p.id}
                 href={`#/project/${p.id}`}
-                className="flex flex-col items-start text-left group cursor-pointer"
+                className="flex flex-col items-start text-left group cursor-pointer rounded-[20px]"
               >
                 {/* Mockup Card Container */}
                 <div
@@ -188,6 +193,9 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
                     src={p.coverImage}
                     alt={`${p.title} Hero`}
                     loading="lazy"
+                    decoding="async"
+                    width={1200}
+                    height={900}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -197,7 +205,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
                   <h3 className="text-xl font-bold text-offblack dark:text-zinc-100 font-display group-hover:opacity-70 transition-opacity">
                     {p.title}
                   </h3>
-                  <span className="text-xs text-zinc-500 font-semibold">
+                  <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold">
                     {p.category}
                   </span>
                 </div>
@@ -207,6 +215,6 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
         </div>
 
       </div>
-    </section>
+    </article>
   )
 }

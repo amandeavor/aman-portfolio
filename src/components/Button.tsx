@@ -21,7 +21,7 @@ export function Button({
   icon: IconComponent,
   iconPosition = 'right',
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-xs font-semibold rounded-full tracking-wide transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offblack/15 focus:ring-offset-2 select-none cursor-pointer'
+  const baseStyles = 'inline-flex min-h-11 items-center justify-center gap-1.5 px-5 py-2.5 text-xs font-semibold rounded-full tracking-normal transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-offblack/25 focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:focus-visible:ring-zinc-100/40 dark:focus-visible:ring-offset-[#111111] select-none cursor-pointer'
 
   const variants = {
     primary: 'bg-offblack text-zinc-50 hover:bg-zinc-800 active:scale-[0.98]',
@@ -39,11 +39,11 @@ export function Button({
       className={`${baseStyles} ${variants[variant]} ${className}`}
     >
       {IconComponent && iconPosition === 'left' && (
-        <IconComponent size={14} weight="bold" className="shrink-0" />
+        <IconComponent size={14} weight="bold" className="shrink-0" aria-hidden="true" />
       )}
       <span>{children}</span>
       {IconComponent && iconPosition === 'right' && (
-        <IconComponent size={14} weight="bold" className="shrink-0" />
+        <IconComponent size={14} weight="bold" className="shrink-0" aria-hidden="true" />
       )}
     </motion.button>
   )

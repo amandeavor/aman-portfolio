@@ -12,15 +12,32 @@
 @variant dark (&:where(.dark, .dark *));
 
 @layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   html {
     scroll-behavior: smooth;
     overflow-x: clip;
     view-transition-name: root;
+    text-size-adjust: 100%;
   }
 
   body {
     @apply bg-paper text-offblack antialiased selection:bg-offblack selection:text-zinc-50;
+    min-height: 100dvh;
+    width: 100%;
     overflow-x: clip;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  #root {
+    min-height: 100dvh;
+    overflow-x: clip;
+    isolation: isolate;
   }
 
   .dark body {
@@ -35,6 +52,43 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
+    text-wrap: balance;
+    letter-spacing: 0;
+  }
+
+  p, li {
+    text-wrap: pretty;
+  }
+
+  img, svg, video, canvas {
+    max-width: 100%;
+  }
+
+  a, button, input, textarea, select {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a, button {
+    touch-action: manipulation;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid #121212;
+    outline-offset: 3px;
+  }
+
+  .dark a:focus-visible,
+  .dark button:focus-visible,
+  .dark input:focus-visible,
+  .dark textarea:focus-visible,
+  .dark select:focus-visible,
+  .dark [tabindex]:focus-visible {
+    outline-color: #e4e4e7;
   }
 
   img:not(.no-outline) {
@@ -53,6 +107,30 @@
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
+  }
+
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 100;
+    transform: translateY(-150%);
+    border-radius: 999px;
+    background: #121212;
+    color: #fafafa;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    transition: transform 180ms ease;
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+
+  .dark .skip-link {
+    background: #fafafa;
+    color: #121212;
   }
 }
 
